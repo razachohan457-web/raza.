@@ -1,0 +1,160 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY COURSE FORM</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family: Arial, Helvetica, sans-serif;}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left, #00ffe0, transparent 40%),
+    radial-gradient(circle at bottom right, #0066ff, transparent 45%),
+    linear-gradient(135deg, #047d73, #00c6ff);
+  position:relative;
+  overflow:hidden;
+}
+body::before, body::after{
+  content:""; position:absolute; width:320px; height:320px; background:rgba(255,255,255,0.18); border-radius:50%; filter: blur(45px); z-index:0;
+}
+body::before{ top:-90px; left:-90px; }
+body::after{ bottom:-90px; right:-90px; }
+
+header{ text-align:center; font-size:28px; background:#06b09f; padding:25px; position:relative; z-index:1; }
+
+.header-paragraph{
+  text-align:center; color:#fff; margin:10px auto 20px; font-size:16px; font-weight:bold;
+}
+
+.info{ text-align:center; background:rgba(5,155,155,0.85); backdrop-filter: blur(8px); width:90%; max-width:520px; margin:18px auto; padding:14px; border-radius:14px; position:relative; z-index:1; }
+
+.form-bg{ display:flex; justify-content:center; padding:20px; position:relative; z-index:1; }
+
+#class{
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(18px);
+  width:100%;
+  max-width:380px;
+  padding:26px;
+  border-radius:24px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.35);
+  position:relative;
+}
+#class label{ font-weight:bold; font-size:14px; }
+#class input{ width:100%; height:36px; margin-bottom:10px; padding:6px 10px; border-radius:12px; border:1px solid rgba(0,0,0,0.3); }
+#class input[type="checkbox"]{ width:auto; height:auto; }
+
+#submitBtn{
+  width:100%;
+  height:44px;
+  border:none;
+  border-radius:24px;
+  background:#06b09f;
+  font-size:16px;
+  cursor:pointer;
+  font-weight:bold;
+  position:relative;
+  transition:0.3s;
+}
+
+#successMsg{
+  display:none;
+  background: rgba(0,255,128,0.8);
+  color: #000;
+  padding:12px;
+  text-align:center;
+  border-radius:12px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.footer-paragraph{
+  text-align:center; color:#fff; margin-bottom:15px; font-size:16px; font-weight:bold;
+}
+
+footer{ background:#06b09f; padding:22px; margin-top:35px; font-size:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; position:relative; z-index:1; }
+.call-btn{ text-decoration:none; background:rgb(124, 73, 225); color:#000; padding:10px 18px; border-radius:30px; font-weight:bold; transition:0.3s; }
+.call-btn:hover{ background:#000; color:#06b09f; }
+
+@media(max-width:480px){ header{font-size:22px;} footer{flex-direction:column; gap:10px; text-align:center;} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>MY COURSE FORM</h1>
+</header>
+
+<div class="header-paragraph">
+  PERSEND BY RAZA CHOHAN
+</div>
+
+<div class="form-bg">
+  <div id="class">
+    <!-- Success message container -->
+    <div id="successMsg">Form submitted successfully ✅</div>
+
+    <form id="myForm">
+      <label>NAME</label><input type="text" id="name" required>
+      <label>FATHER NAME</label><input type="text" id="fname" required>
+      <label>BIRTH DATE</label><input type="date" id="dob" required>
+      <label>SELECT YOUR COURSE</label><br><br>
+      <input type="checkbox" value="Web Development"> Web Development<br>
+      <input type="checkbox" value="Graphic Designing"> Graphic Designing<br>
+      <input type="checkbox" value="Cyber Security"> Cyber Security<br>
+      <input type="checkbox" value="Digital Marketing"> Digital Marketing<br>
+      <input type="checkbox" value="Mobile Management"> Mobile Management<br><br>
+      <label>GMAIL</label><input type="email" id="email" required>
+      <label>PHONE NUMBER</label><input type="number" id="phone" required>
+      <button type="submit" id="submitBtn">SUBMIT</button>
+    </form>
+  </div>
+</div>
+
+<div class="footer-paragraph">
+  All course details collected for IT & digital training
+</div>
+
+<footer>
+  <div>
+    <strong>RAZA CHOHAN</strong><br>
+    razachohan457@gmail.com
+  </div>
+</footer>
+
+<!-- JS SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("myForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const successMsg = document.getElementById("successMsg");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Show success message
+    successMsg.style.display = "block";
+
+    // Change button text
+    submitBtn.innerText = "Sent ✅";
+    submitBtn.disabled = true;
+
+    // Play voice message
+    const msg = new SpeechSynthesisUtterance("Form submitted successfully");
+    window.speechSynthesis.speak(msg);
+
+    // Optionally reset form after a delay (comment if not needed)
+    setTimeout(() => {
+      form.reset();
+      submitBtn.innerText = "SUBMIT";
+      submitBtn.disabled = false;
+      successMsg.style.display = "none";
+    }, 5000); // 5 seconds delay
+  });
+});
+</script>
+
+</body>
+</html>
